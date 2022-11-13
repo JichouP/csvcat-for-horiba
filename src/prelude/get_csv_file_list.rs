@@ -3,7 +3,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
-fn get_csv_file_list<P: AsRef<Path>>(path: P) -> io::Result<Vec<PathBuf>> {
+pub fn get_csv_file_list<P: AsRef<Path>>(path: P) -> io::Result<Vec<PathBuf>> {
     let file_list: Vec<PathBuf> = fs::read_dir(path)?
         .into_iter()
         .filter_map(|entry| {

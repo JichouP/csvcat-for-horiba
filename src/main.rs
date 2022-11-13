@@ -1,6 +1,9 @@
-mod get_csv_file_list;
-mod read_column_from_csv;
+use prelude::*;
+use std::env;
+
+mod prelude;
 
 fn main() {
-    println!("Hello, world!");
+    let current_dir = env::current_dir().expect("Error: Can't get current directory");
+    let csv_file_list = get_csv_file_list(current_dir).unwrap_or_else(|err| panic!("{}", err));
 }
