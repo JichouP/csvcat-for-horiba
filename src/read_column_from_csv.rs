@@ -54,4 +54,10 @@ mod tests {
     fn read_nonexistent_column() {
         read_column_from_csv(CSV_PATH, 2).unwrap();
     }
+
+    #[test]
+    #[should_panic]
+    fn read_nonexistent_file() {
+        read_column_from_csv("nonexistent/file", 0).unwrap();
+    }
 }

@@ -1,0 +1,7 @@
+[tasks.cov]
+command = "cargo"
+args = ["llvm-cov"]
+
+[tasks.cov-open]
+command = "cargo"
+args = ["llvm-cov", "--open"]
