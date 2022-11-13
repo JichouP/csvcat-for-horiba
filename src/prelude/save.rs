@@ -14,7 +14,7 @@ pub fn save(sum: Vec<Vec<f64>>, avg: Vec<Vec<f64>>) {
                 .collect::<Vec<_>>()
                 .join("\n"),
         )
-        .unwrap_or_else(|err| panic!("{}", err));
+        .unwrap();
     });
 
     avg.par_iter().enumerate().for_each(|(i, v)| {
@@ -25,6 +25,6 @@ pub fn save(sum: Vec<Vec<f64>>, avg: Vec<Vec<f64>>) {
                 .collect::<Vec<_>>()
                 .join("\n"),
         )
-        .unwrap_or_else(|err| panic!("{}", err));
+        .unwrap();
     });
 }

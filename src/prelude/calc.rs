@@ -14,7 +14,7 @@ pub fn calc(groups: Vec<Vec<PathBuf>>) -> (Vec<Vec<f64>>, Vec<Vec<f64>>) {
         .map(|group| {
             group
                 .par_iter()
-                .map(|path| read_column_from_csv(path, 0).unwrap_or_else(|err| panic!("{}", err)))
+                .map(|path| read_column_from_csv(path, 0).unwrap())
                 .reduce(|| vec![0.0; csv_len], |a, b| get_sum_mut(a, &b))
         })
         .collect();
