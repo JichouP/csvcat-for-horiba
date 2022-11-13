@@ -13,7 +13,7 @@ fn get_csv_file_list<P: AsRef<Path>>(path: P) -> io::Result<Vec<PathBuf>> {
             let ext = path.extension().and_then(|ext| ext.to_str());
 
             match ext {
-                Some("csv") => return Some(path),
+                Some("csv") => Some(path),
                 _ => None,
             }
         })

@@ -13,16 +13,21 @@ pub fn read_column_from_csv<P: AsRef<Path>>(path: P, nth_column: usize) -> Resul
             record
                 .expect("Failed to read string record")
                 .get(nth_column)
-                .expect(&format!(
-                    "There is no {}th column in {}",
-                    nth_column,
-                    &path.as_ref().to_string_lossy()
-                ))
+                .unwrap_or_else(|| {
+                    panic!(
+                        "There is no {}th column in {}",
+                        nth_column,
+                        &path.as_ref().to_string_lossy()
+                    )
+                })
                 .parse::<f64>()
-                .expect(&format!(
-                    "Couldn't parse as f64 in {}",
-                    &path.as_ref().to_string_lossy()
-                ))
+                .unwrap_or_else(|err| {
+                    panic!(
+                        "Couldn't parse as f64 in {}\nError: {}",
+                        &path.as_ref().to_string_lossy(),
+                        err
+                    )
+                })
         })
         .collect::<Vec<_>>();
 
