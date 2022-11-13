@@ -1,12 +1,14 @@
 use rayon::prelude::{IndexedParallelIterator, IntoParallelRefIterator, ParallelIterator};
 use std::fs;
 
+const DIST_DIR: &'static str = "aggregated";
+
 pub fn save(sum: Vec<Vec<f64>>, avg: Vec<Vec<f64>>) {
-    fs::create_dir_all("aggregated").expect("Error: Can't create dist dir");
+    fs::create_dir_all(DIST_DIR).expect("Error: Can't create dist dir");
 
     sum.par_iter().enumerate().for_each(|(i, v)| {
         fs::write(
-            format!("aggregated/sum-CH{}.csv", i + 1),
+            format!("{}/sum-CH{}.csv", DIST_DIR, i + 1),
             v.iter()
                 .map(|v| v.to_string())
                 .collect::<Vec<_>>()
@@ -17,7 +19,7 @@ pub fn save(sum: Vec<Vec<f64>>, avg: Vec<Vec<f64>>) {
 
     avg.par_iter().enumerate().for_each(|(i, v)| {
         fs::write(
-            format!("aggregated/avg-CH{}.csv", i + 1),
+            format!("{}/avg-CH{}.csv", DIST_DIR, i + 1),
             v.iter()
                 .map(|v| v.to_string())
                 .collect::<Vec<_>>()
