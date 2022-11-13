@@ -4,3 +4,7 @@ mod group_by_ch;
 pub use group_by_ch::*;
 mod read_column_from_csv;
 pub use read_column_from_csv::*;
+mod get_sum;
+pub use get_sum::*;
+mod get_avg;
+pub use get_avg::*;
