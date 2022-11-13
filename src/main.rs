@@ -8,4 +8,5 @@ fn main() {
     let csv_file_list = get_csv_file_list(current_dir).unwrap_or_else(|err| panic!("{}", err));
     let groups = group_by_ch(csv_file_list).unwrap_or_else(|err| panic!("{}", err));
     let (sum, avg) = calc(groups);
+    save(sum, avg);
 }

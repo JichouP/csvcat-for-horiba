@@ -7,6 +7,8 @@ pub fn calc(groups: Vec<Vec<PathBuf>>) -> (Vec<Vec<f64>>, Vec<Vec<f64>>) {
         .expect("Error: Can't load csv file")
         .len();
 
+    let group_len = groups[0].len();
+
     let sum: Vec<Vec<f64>> = groups
         .into_par_iter()
         .map(|group| {
@@ -19,7 +21,7 @@ pub fn calc(groups: Vec<Vec<PathBuf>>) -> (Vec<Vec<f64>>, Vec<Vec<f64>>) {
 
     let avg: Vec<Vec<f64>> = sum
         .par_iter()
-        .map(|v| v.into_par_iter().map(|v| v / csv_len as f64).collect())
+        .map(|v| v.into_par_iter().map(|v| v / group_len as f64).collect())
         .collect();
 
     (sum, avg)

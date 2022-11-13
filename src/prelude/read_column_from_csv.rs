@@ -1,6 +1,5 @@
-use std::path::Path;
-
 use csv::Result;
+use std::path::Path;
 
 pub fn read_column_from_csv<P: AsRef<Path>>(path: P, nth_column: usize) -> Result<Vec<f64>> {
     let path = path.as_ref();
