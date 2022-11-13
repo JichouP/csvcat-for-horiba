@@ -57,12 +57,18 @@ mod tests {
     #[test]
     #[should_panic]
     fn read_nonexistent_column() {
-        read_column_from_csv(TESTDATA_PATH, 2).unwrap();
+        read_column_from_csv(format!("{}/sample.csv", TESTDATA_PATH), 2).unwrap();
+    }
+
+    #[test]
+    #[should_panic]
+    fn read_csv_includes_invalid_value() {
+        read_column_from_csv(format!("{}/invalid_value.csv", TESTDATA_PATH), 0).unwrap();
     }
 
     #[test]
     #[should_panic]
     fn read_nonexistent_file() {
-        read_column_from_csv("nonexistent/file", 0).unwrap();
+        read_column_from_csv(format!("{}/nonexistent/file", TESTDATA_PATH), 0).unwrap();
     }
 }
