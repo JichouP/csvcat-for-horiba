@@ -31,7 +31,7 @@ fn get_max_ch(paths: &Vec<PathBuf>) -> usize {
                 .expect("Error: Can't parse the CH number")
         })
         .max()
-        .expect("Error: Can't get max CH number")
+        .expect("Error: Can't find CSV file")
 }
 
 fn is_contain_target_ch(path: &PathBuf, ch: usize) -> bool {
