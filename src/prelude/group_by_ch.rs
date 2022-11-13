@@ -1,9 +1,12 @@
 use std::{io, path::PathBuf};
 
+use rayon::prelude::{IntoParallelIterator, ParallelBridge, ParallelIterator};
+
 pub fn group_by_ch(paths: Vec<PathBuf>) -> io::Result<Vec<Vec<PathBuf>>> {
     let max_ch_number = get_max_ch(&paths);
 
     let result: Vec<Vec<PathBuf>> = (1..max_ch_number + 1)
+        .par_bridge()
         .map(|ch| {
             paths
                 .iter()
@@ -18,7 +21,7 @@ pub fn group_by_ch(paths: Vec<PathBuf>) -> io::Result<Vec<Vec<PathBuf>>> {
 
 fn get_max_ch(paths: &Vec<PathBuf>) -> usize {
     paths
-        .into_iter()
+        .into_par_iter()
         .map(|path| {
             let path = path.to_string_lossy().to_string();
             path.split("CH")

@@ -3,9 +3,11 @@ use std::{
     path::{Path, PathBuf},
 };
 
+use rayon::prelude::{ParallelBridge, ParallelIterator};
+
 pub fn get_csv_file_list<P: AsRef<Path>>(path: P) -> io::Result<Vec<PathBuf>> {
     let file_list: Vec<PathBuf> = fs::read_dir(path)?
-        .into_iter()
+        .par_bridge()
         .filter_map(|entry| {
             let path = entry.expect("Failed to exec read_dir").path();
 

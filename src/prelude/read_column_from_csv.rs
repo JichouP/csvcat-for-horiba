@@ -3,9 +3,11 @@ use std::path::Path;
 use csv::Result;
 
 pub fn read_column_from_csv<P: AsRef<Path>>(path: P, nth_column: usize) -> Result<Vec<f64>> {
+    let path = path.as_ref();
+
     let mut rdr = csv::ReaderBuilder::new()
         .has_headers(false)
-        .from_path(&path)?;
+        .from_path(path)?;
 
     let data = rdr
         .records()
@@ -17,14 +19,14 @@ pub fn read_column_from_csv<P: AsRef<Path>>(path: P, nth_column: usize) -> Resul
                     panic!(
                         "There is no {}th column in {}",
                         nth_column,
-                        &path.as_ref().to_string_lossy()
+                        &path.to_string_lossy()
                     )
                 })
                 .parse::<f64>()
                 .unwrap_or_else(|err| {
                     panic!(
                         "Couldn't parse as f64 in {}\nError: {}",
-                        &path.as_ref().to_string_lossy(),
+                        &path.to_string_lossy(),
                         err
                     )
                 })
