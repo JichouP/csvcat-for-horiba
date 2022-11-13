@@ -37,19 +37,19 @@ pub fn read_column_from_csv<P: AsRef<Path>>(path: P, nth_column: usize) -> Resul
 #[cfg(test)]
 mod tests {
     use super::*;
-    const CSV_PATH: &'static str = "testdata/sample.csv";
+    const TESTDATA_PATH: &'static str = "testdata/read_column_from_csv";
     #[test]
     fn read_first_column() {
-        let actual = read_column_from_csv(CSV_PATH, 0).unwrap();
-        let expect = vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0];
+        let actual = read_column_from_csv(format!("{}/sample.csv", TESTDATA_PATH), 0).unwrap();
+        let expect = read_column_from_csv(format!("{}/column0.csv", TESTDATA_PATH), 0).unwrap();
 
         assert_eq!(actual, expect);
     }
 
     #[test]
     fn read_second_column() {
-        let actual = read_column_from_csv(CSV_PATH, 1).unwrap();
-        let expect = vec![2.0, 4.0, 6.0, 8.0, 10.0, 12.0, 14.0, 16.0, 18.0, 20.0];
+        let actual = read_column_from_csv(format!("{}/sample.csv", TESTDATA_PATH), 1).unwrap();
+        let expect = read_column_from_csv(format!("{}/column1.csv", TESTDATA_PATH), 0).unwrap();
 
         assert_eq!(actual, expect);
     }
@@ -57,7 +57,7 @@ mod tests {
     #[test]
     #[should_panic]
     fn read_nonexistent_column() {
-        read_column_from_csv(CSV_PATH, 2).unwrap();
+        read_column_from_csv(TESTDATA_PATH, 2).unwrap();
     }
 
     #[test]

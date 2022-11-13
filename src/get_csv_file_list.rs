@@ -8,7 +8,6 @@ fn get_csv_file_list<P: AsRef<Path>>(path: P) -> io::Result<Vec<PathBuf>> {
         .into_iter()
         .filter_map(|entry| {
             let path = entry.ok()?.path();
-            println!("{:?}", path);
 
             let ext = path.extension().and_then(|ext| ext.to_str());
 
@@ -25,11 +24,11 @@ fn get_csv_file_list<P: AsRef<Path>>(path: P) -> io::Result<Vec<PathBuf>> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    const TESTDATA_PATH: &'static str = "testdata";
+    const TESTDATA_PATH: &'static str = "testdata/get_csv_file_list";
     #[test]
     fn should_return_only_csv_files() {
         let actual = get_csv_file_list(TESTDATA_PATH).unwrap();
-        let expect = vec![PathBuf::from("testdata/sample.csv")];
+        let expect = vec![PathBuf::from(format!("{}/dummy.csv", TESTDATA_PATH))];
 
         assert_eq!(actual, expect);
     }
