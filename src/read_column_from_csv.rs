@@ -32,7 +32,7 @@ pub fn read_column_from_csv<P: AsRef<Path>>(path: P, nth_column: usize) -> Resul
 #[cfg(test)]
 mod tests {
     use super::*;
-    const CSV_PATH: &'static str = "test/sample.csv";
+    const CSV_PATH: &'static str = "testdata/sample.csv";
     #[test]
     fn read_first_column() {
         let actual = read_column_from_csv(CSV_PATH, 0).unwrap();
